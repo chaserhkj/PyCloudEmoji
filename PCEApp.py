@@ -49,6 +49,7 @@ class PCEApp(object):
 
     def copyEmoji(self, row):
         self._cb.setText(self._mgr.emojis[self._seletedCate][row]["emoticon"])
+        self._rootObj.minimize()
 
     def addRepo(self, url):
         self._mgr.addFile(url.toLocalFile())

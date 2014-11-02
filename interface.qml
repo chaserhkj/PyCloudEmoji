@@ -43,7 +43,10 @@ ApplicationWindow {
         box.open()
     }
 
-    
+    function minimize() {
+        window.visibility = Window.Minimized
+    }
+
     TabView {
         id: tabView
         anchors.fill: parent
