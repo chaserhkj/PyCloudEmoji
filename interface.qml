@@ -63,7 +63,7 @@ ApplicationWindow {
                     anchors.bottom: parent.bottom
                     Layout.fillWidth: true
                     Layout.preferredWidth: parent.width /4
-                    TableViewColumn {role: "name"; title: "Name"}
+                    TableViewColumn {role: "name"; title: "Category"}
                     model: cateModel
                     onClicked: window.cateClicked(row)
                 }
@@ -73,8 +73,8 @@ ApplicationWindow {
                     anchors.bottom: parent.bottom
                     Layout.fillWidth: true
                     Layout.preferredWidth: parent.width /4 *3
-                    TableViewColumn {role: "name"; title: "Name"; width:100}
-                    TableViewColumn {role: "content"; title: "Content"}
+                    TableViewColumn {role: "name"; title: "Description"; width:100}
+                    TableViewColumn {role: "content"; title: "Emoticon"}
                     model: emojisModel
                     onActivated: window.emojiActivated(row)
                 }
@@ -121,8 +121,8 @@ ApplicationWindow {
                     Layout.fillHeight: true
                     Layout.preferredHeight: parent.height - btnRow.height
                     anchors.bottom: parent.bottom
-                    TableViewColumn {role: "name"; title: "Name"; width:100}
-                    TableViewColumn {role: "path"; title: "File Path"}
+                    TableViewColumn {role: "name"; title: "Repo Name"; width:100}
+                    TableViewColumn {role: "content"; title: "File Path"}
                     FileDialog {
                         id: addRepo
                         title: "Please choose a repo file to add."
