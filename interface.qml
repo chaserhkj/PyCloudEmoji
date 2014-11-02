@@ -12,7 +12,7 @@ ApplicationWindow {
     height: 400
     minimumHeight: 200
 
-    signal cataClicked(int row)
+    signal cateClicked(int row)
     signal emojiActivated(int row)
     signal addRepoRequested(url file)
     signal delRepoRequested(int row)
@@ -58,14 +58,14 @@ ApplicationWindow {
                 spacing: 10
                 anchors.fill: parent
                 TableView {
-                    id: cata
+                    id: cate
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     Layout.fillWidth: true
                     Layout.preferredWidth: parent.width /4
                     TableViewColumn {role: "name"; title: "Name"}
-                    model: cataModel
-                    onClicked: window.cataClicked(row)
+                    model: cateModel
+                    onClicked: window.cateClicked(row)
                 }
                 TableView {
                     id: emojis
