@@ -11,6 +11,10 @@ ApplicationWindow {
     height: 400
     minimumHeight: 200
 
+    property ListModel cataModel 
+    property ListModel emojisModel
+    property ListModel reposModel
+
     TabView {
         id: tabView
         anchors.fill: parent
@@ -28,15 +32,13 @@ ApplicationWindow {
                 spacing: 10
                 anchors.fill: parent
                 TableView {
-                    id: repos
+                    id: cata
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     Layout.fillWidth: true
                     Layout.preferredWidth: parent.width /4
                     TableViewColumn {role: "name"; title: "Name"}
-                    model: ListModel {
-                        id: reposModel
-                    }
+                    model: window.cataModel
                 }
                 TableView {
                     id: emojis
@@ -46,9 +48,7 @@ ApplicationWindow {
                     Layout.preferredWidth: parent.width /4 *3
                     TableViewColumn {role: "name"; title: "Name"; width:100}
                     TableViewColumn {role: "content"; title: "Content"}
-                    model: ListModel {
-                        id: emojisModel
-                    }
+                    model: window.emojisModel
                 }
 
             }
@@ -80,12 +80,14 @@ ApplicationWindow {
                     }
                 }
                 TableView {
+                    id: repos
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.preferredHeight: parent.height - btnRow.height
                     anchors.bottom: parent.bottom
                     TableViewColumn {role: "name"; title: "Name"; width:100}
                     TableViewColumn {role: "path"; title: "File Path"}
+                    model: window.reposModel
                 }
             }
         }
