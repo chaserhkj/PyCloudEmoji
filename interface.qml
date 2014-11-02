@@ -12,10 +12,6 @@ ApplicationWindow {
     height: 400
     minimumHeight: 200
 
-    property ListModel cataModel 
-    property ListModel emojisModel
-    property ListModel reposModel
-
     signal cataClicked(int row)
     signal emojiActivated(int row)
     signal addRepoRequested(url file)
@@ -68,7 +64,7 @@ ApplicationWindow {
                     Layout.fillWidth: true
                     Layout.preferredWidth: parent.width /4
                     TableViewColumn {role: "name"; title: "Name"}
-                    model: window.cataModel
+                    model: cataModel
                     onClicked: window.cataClicked(row)
                 }
                 TableView {
@@ -79,7 +75,7 @@ ApplicationWindow {
                     Layout.preferredWidth: parent.width /4 *3
                     TableViewColumn {role: "name"; title: "Name"; width:100}
                     TableViewColumn {role: "content"; title: "Content"}
-                    model: window.emojisModel
+                    model: emojisModel
                     onActivated: window.emojiActivated(row)
                 }
 
@@ -144,7 +140,7 @@ ApplicationWindow {
                         standardButtons: StandardButton.Yes | StandardButton.No
                         onAccepted: window.delRepoRequested(repos.currentIndex)
                     }
-                    model: window.reposModel
+                    model: reposModel
                 }
             }
         }
@@ -163,4 +159,7 @@ ApplicationWindow {
             
         }            
     }
+
 }
+
+    
