@@ -15,6 +15,9 @@ ApplicationWindow {
     property ListModel emojisModel
     property ListModel reposModel
 
+    signal cataClicked(int row)
+    signal emojiActivated(int row)
+    
     TabView {
         id: tabView
         anchors.fill: parent
@@ -39,6 +42,7 @@ ApplicationWindow {
                     Layout.preferredWidth: parent.width /4
                     TableViewColumn {role: "name"; title: "Name"}
                     model: window.cataModel
+                    onClicked: window.cataClicked(row)
                 }
                 TableView {
                     id: emojis
@@ -49,6 +53,7 @@ ApplicationWindow {
                     TableViewColumn {role: "name"; title: "Name"; width:100}
                     TableViewColumn {role: "content"; title: "Content"}
                     model: window.emojisModel
+                    onActivated: window.emojiActivated(row)
                 }
 
             }
