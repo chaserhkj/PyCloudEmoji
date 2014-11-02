@@ -50,3 +50,10 @@ class DataMgr(object):
                 "name":cate
             })
         self._cates.extend(cates)
+    def addFile(self, path):
+        if path.lower().endswith(".json"):
+            self.addJSONFile(path)
+        elif path.lower().endswith(".xml"):
+            self.addXMLFile(path)
+        else:
+            raise(ValueError, "Can not determine file type from name.")

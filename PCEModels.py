@@ -23,7 +23,7 @@ class EmojiModel(QAbstractTableModel):
 
 class CateModel(QAbstractListModel):
     def __init__(self, cates):
-        self._cates = [i["name"] for i in cates]
+        self._cates = cates
         super(CateModel,self).__init__()
     def rowCount(self, index = None):
         return len(self._cates)
@@ -34,7 +34,7 @@ class CateModel(QAbstractListModel):
             return QVariant()
     def setCates(self, cates):
         self.beginResetModel()
-        self._cates = [i["name"] for i in cates]
+        self._cates = cates
         self.endResetModel()
 
 class RepoModel(QAbstractTableModel):
@@ -50,3 +50,8 @@ class RepoModel(QAbstractTableModel):
             return self._repos[index.row()][index.column()]
         else:
             return QVariant()
+    def setRepos(self, repos):
+        self.beginResetModel()
+        self._repos = repos
+        self.endResetModel()
+        
