@@ -16,7 +16,10 @@ ApplicationWindow {
     signal emojiActivated(int row)
     signal addRepoRequested(url file)
     signal delRepoRequested(int row)
+    signal aboutToClose()
 
+    onClosing: aboutToClose()
+    
     MessageDialog {
         id: box
         title: "<title>"

@@ -4,7 +4,8 @@ from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtCore import QUrl
 import PCEModels
 import PCEDataMgr
-import sys
+import os,sys
+import json
 
 class PCEApp(object):
     def __init__(self, app):
@@ -27,9 +28,18 @@ class PCEApp(object):
         self._rootObj.emojiActivated.connect(self.copyEmoji)
         self._rootObj.addRepoRequested.connect(self.addRepo)
         self._rootObj.delRepoRequested.connect(self.delRepo)
-
-        self._seletedCate = -1
+        self._rootObj.aboutToClose.connect(self.saveAndCleanUp)
         
+        self._seletedCate = -1
+
+        self._config = os.path.join(os.environ["HOME"],".PCE.json")
+
+        if os.path.exists(self._config):
+            with open(self._config) as f:
+                repoList = json.load(f)
+            for i in repoList:
+                self.addRepo(QUrl.fromLocalFile(i))
+                
     def show(self):
         self._rootObj.show()
 
@@ -47,6 +57,10 @@ class PCEApp(object):
         
     def delRepo(self, row):
         self._rootObj.warning("Not implemented!")
+
+    def saveAndCleanUp(self):
+        with open(self._config, "w") as f:
+            json.dump([i[1] for i in self._mgr.repos], f, indent = 4)
 
 if __name__=="__main__":
     app = QGuiApplication(sys.argv)
