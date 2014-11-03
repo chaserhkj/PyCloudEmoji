@@ -73,10 +73,16 @@ ApplicationWindow {
         window.visibility = Window.Minimized
     }
 
+    function deselectEmoji() {
+        var emojisView = tabView.getTab(0).item.emojisView
+        emojisView.selection.clear()
+    }
+    
     Component {
         id: emojisTab
         RowLayout {
             id: rowLayout
+            property alias emojisView: emojis
             anchors.topMargin: 10
             anchors.leftMargin: 10
             anchors.rightMargin:  10

@@ -9,7 +9,7 @@ from PyQt5.QtCore import QUrl
 import PCEModels
 import PCEDataMgr
 import os,sys
-import json
+import json,time
 
 class PCEApp(object):
     def __init__(self, app):
@@ -53,6 +53,8 @@ class PCEApp(object):
 
     def copyEmoji(self, row):
         self._cb.setText(self._mgr.emojis[self._seletedCate][row]["emoticon"])
+        self._rootObj.deselectEmoji()
+        time.sleep(0.5) # This sounds like a hack, may have more elegant methods
         self._rootObj.minimize()
 
     def addRepo(self, url):
