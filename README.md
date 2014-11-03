@@ -18,3 +18,9 @@ Roadmap
 - Support cloudemoticon:// and cloudemoticons:// protocols
 - Support user settings
 - Make prebuilt versions for windows (and OS X), check compatibility issues.
+
+License
+=======
+
+This software is licensed under the MIT license.
+See COPYRIGHT for more details.
