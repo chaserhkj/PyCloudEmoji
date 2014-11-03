@@ -61,8 +61,10 @@ class PCEApp(object):
         self._cateM.setCates(self._mgr.names)
         
     def delRepo(self, row):
-        self._rootObj.warning("Not implemented!")
-
+        self._mgr.delRepo(row)
+        self._repoM.setRepos(self._mgr.repos)
+        self._cateM.setCates(self._mgr.names)
+        
     def saveAndCleanUp(self):
         with open(self._config, "w") as f:
             json.dump([i[1] for i in self._mgr.repos], f, indent = 4)
