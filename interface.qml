@@ -116,7 +116,7 @@ ApplicationWindow {
                         Layout.maximumWidth: 100
                         text: "Delete"
                         onClicked: {
-                            if (repos.currentItem == null) {
+                            if (repos.selected == -1) {
                                 window.warning("No repo selected to delete.")
                             } else {
                                 confirmDelete.open()
@@ -126,6 +126,8 @@ ApplicationWindow {
                 }
                 TableView {
                     id: repos
+                    property int selected: -1
+                    onClicked: selected = row
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.preferredHeight: parent.height - btnRow.height
