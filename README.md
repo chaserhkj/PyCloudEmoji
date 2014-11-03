@@ -9,6 +9,7 @@ Roadmap
 
 - Basic Features (Working)
 - Make licensing clear (Working)
+- Make reasonable error report system.
 - Support favourites
 - Support editing of emoticons
 - Support auto-downloading source files
