@@ -7,11 +7,12 @@ A cloud solution to your favorite emoticons on Desktop(Python cross platform ver
 Roadmap
 =======
 
-- Basic Features (Working)
-- Make licensing clear (Working)
+- Basic Features (Done)
+- Make licensing clear (Done)
 - Make reasonable error report system.
 - Support favourites
 - Support editing of emoticons
+- Support re-ordering of emoticons
 - Support auto-downloading source files
 - Optimize the interface
     - Use a font that will properly display all emojis
