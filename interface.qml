@@ -73,6 +73,129 @@ ApplicationWindow {
         window.visibility = Window.Minimized
     }
 
+    Component {
+        id: emojisTab
+        RowLayout {
+            id: rowLayout
+            anchors.topMargin: 10
+            anchors.leftMargin: 10
+            anchors.rightMargin:  10
+            anchors.bottomMargin:  10
+            spacing: 10
+            anchors.fill: parent
+            TableView {
+                id: cate
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                Layout.fillWidth: true
+                Layout.preferredWidth: parent.width /4
+                TableViewColumn {role: "name"; title: "Category"}
+                model: cateModel
+                onClicked: window.cateClicked(row)
+            }
+            TableView {
+                id: emojis
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                Layout.fillWidth: true
+                Layout.preferredWidth: parent.width /4 *3
+                TableViewColumn {role: "name"; title: "Description"; width:100}
+                TableViewColumn {role: "content"; title: "Emoticon"}
+                model: emojisModel
+                onActivated: window.emojiActivated(row)
+            }
+
+        }
+
+    }
+
+
+    Component {
+        id: reposTab
+        ColumnLayout {
+            id: columnLayout
+            anchors.fill: parent
+            anchors.topMargin: 10
+            anchors.leftMargin: 10
+            anchors.rightMargin:  10
+            anchors.bottomMargin:  10
+            RowLayout {
+                id: btnRowLayout
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.preferredHeight: 30
+                Layout.alignment: Qt.AlignHCenter
+                spacing: 50
+                Button {
+                    id: addBtn
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 100
+                    text: "Add"
+                    onClicked: addRepo.open()
+                }
+                Button {
+                    id: delBtn
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 100
+                    text: "Delete"
+                    onClicked: {
+                        if (repos.selected == -1) {
+                            window.warning("No repo selected to delete.")
+                        } else {
+                            confirmDelete.open()
+                        }
+                    }
+                }
+            }
+            TableView {
+                id: repos
+                property int selected: -1
+                onClicked: selected = row
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.preferredHeight: parent.height - btnRowLayout.height
+                anchors.bottom: parent.bottom
+                TableViewColumn {role: "name"; title: "Repo Name"; width:100}
+                TableViewColumn {role: "content"; title: "File Path"}
+                FileDialog {
+                    id: addRepo
+                    title: "Please choose a repo file to add."
+                    nameFilters: ["JSON repo file (*.json)", "XML repo file (*.xml)", "All files (*.*)"]
+                    modality: Qt.WindowModal
+                    selectExisting: true
+                    onAccepted: window.addRepoRequested(fileUrl)
+                }
+                MessageDialog {
+                    id: confirmDelete
+                    title: "Confirm of deletion"
+                    text: "Are you sure to delete this repo from the list?\nThe actual file will not be deleted."
+                    icon: StandardIcon.Question
+                    modality: Qt.WindowModal
+                    standardButtons: StandardButton.Yes | StandardButton.No
+                    onYes: window.delRepoRequested(repos.selected)
+                }
+                model: reposModel
+            }
+        }
+
+    }
+
+    Component {
+        id: aboutTab
+        TextArea {
+            id: about
+            readOnly: true
+            text: window.copyright
+            anchors.fill: parent
+            anchors.topMargin: 20
+            anchors.bottomMargin: 20
+            anchors.leftMargin: 20
+            anchors.rightMargin:  20
+
+        }
+
+    }
+
     TabView {
         id: tabView
         anchors.fill: parent
@@ -81,124 +204,16 @@ ApplicationWindow {
         anchors.rightMargin:  10               
         anchors.bottomMargin:  10
         Tab {
-            id: emojisTab
             title: "Emojis"
-            RowLayout {
-                id: rowLayout
-                anchors.topMargin: 10
-                anchors.leftMargin: 10
-                anchors.rightMargin:  10
-                anchors.bottomMargin:  10
-                spacing: 10
-                anchors.fill: parent
-                TableView {
-                    id: cate
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    Layout.fillWidth: true
-                    Layout.preferredWidth: parent.width /4
-                    TableViewColumn {role: "name"; title: "Category"}
-                    model: cateModel
-                    onClicked: window.cateClicked(row)
-                }
-                TableView {
-                    id: emojis
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    Layout.fillWidth: true
-                    Layout.preferredWidth: parent.width /4 *3
-                    TableViewColumn {role: "name"; title: "Description"; width:100}
-                    TableViewColumn {role: "content"; title: "Emoticon"}
-                    model: emojisModel
-                    onActivated: window.emojiActivated(row)
-                }
-
-            }
+            sourceComponent: emojisTab
         }
         Tab {
-            id: reposTab
             title: "Repos"
-            ColumnLayout {
-                id: columnLayout
-                anchors.fill: parent
-                anchors.topMargin: 10
-                anchors.leftMargin: 10
-                anchors.rightMargin:  10               
-                anchors.bottomMargin:  10            
-                RowLayout {
-                    id: btnRowLayout
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: 30
-                    Layout.alignment: Qt.AlignHCenter
-                    spacing: 50
-                    Button {
-                        id: addBtn
-                        Layout.fillWidth: true
-                        Layout.maximumWidth: 100
-                        text: "Add"
-                        onClicked: addRepo.open()
-                    }
-                    Button {
-                        id: delBtn
-                        Layout.fillWidth: true
-                        Layout.maximumWidth: 100
-                        text: "Delete"
-                        onClicked: {
-                            if (repos.selected == -1) {
-                                window.warning("No repo selected to delete.")
-                            } else {
-                                confirmDelete.open()
-                            }
-                        }
-                    }
-                }
-                TableView {
-                    id: repos
-                    property int selected: -1
-                    onClicked: selected = row
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    Layout.preferredHeight: parent.height - btnRowLayout.height
-                    anchors.bottom: parent.bottom
-                    TableViewColumn {role: "name"; title: "Repo Name"; width:100}
-                    TableViewColumn {role: "content"; title: "File Path"}
-                    FileDialog {
-                        id: addRepo
-                        title: "Please choose a repo file to add."
-                        nameFilters: ["JSON repo file (*.json)", "XML repo file (*.xml)", "All files (*.*)"]
-                        modality: Qt.WindowModal
-                        selectExisting: true
-                        onAccepted: window.addRepoRequested(fileUrl)
-                    }
-                    MessageDialog {
-                        id: confirmDelete
-                        title: "Confirm of deletion"
-                        text: "Are you sure to delete this repo from the list?\nThe actual file will not be deleted."
-                        icon: StandardIcon.Question
-                        modality: Qt.WindowModal
-                        standardButtons: StandardButton.Yes | StandardButton.No
-                        onYes: window.delRepoRequested(repos.selected)
-                    }
-                    model: reposModel
-                }
-            }
+            sourceComponent: reposTab
         }
         Tab {
-            id: aboutTab
             title: "About"
-            TextArea {
-                id: about
-                readOnly: true
-                text: window.copyright
-                anchors.fill: parent
-                anchors.topMargin: 20
-                anchors.bottomMargin: 20
-                anchors.leftMargin: 20
-                anchors.rightMargin:  20               
-
-            } 
-            
+            sourceComponent: aboutTab
         }            
     }
 
