@@ -149,7 +149,7 @@ ApplicationWindow {
                         icon: StandardIcon.Question
                         modality: Qt.WindowModal
                         standardButtons: StandardButton.Yes | StandardButton.No
-                        onYes: window.delRepoRequested(repos.currentIndex)
+                        onYes: window.delRepoRequested(repos.selected)
                     }
                     model: reposModel
                 }
