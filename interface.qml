@@ -81,8 +81,10 @@ ApplicationWindow {
         anchors.rightMargin:  10               
         anchors.bottomMargin:  10
         Tab {
+            id: emojisTab
             title: "Emojis"
             RowLayout {
+                id: rowLayout
                 anchors.topMargin: 10
                 anchors.leftMargin: 10
                 anchors.rightMargin:  10
@@ -114,27 +116,31 @@ ApplicationWindow {
             }
         }
         Tab {
+            id: reposTab
             title: "Repos"
             ColumnLayout {
+                id: columnLayout
                 anchors.fill: parent
                 anchors.topMargin: 10
                 anchors.leftMargin: 10
                 anchors.rightMargin:  10               
                 anchors.bottomMargin:  10            
                 RowLayout {
-                    id: btnRow
+                    id: btnRowLayout
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     Layout.preferredHeight: 30
                     Layout.alignment: Qt.AlignHCenter
                     spacing: 50
                     Button {
+                        id: addBtn
                         Layout.fillWidth: true
                         Layout.maximumWidth: 100
                         text: "Add"
                         onClicked: addRepo.open()
                     }
                     Button {
+                        id: delBtn
                         Layout.fillWidth: true
                         Layout.maximumWidth: 100
                         text: "Delete"
@@ -153,7 +159,7 @@ ApplicationWindow {
                     onClicked: selected = row
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    Layout.preferredHeight: parent.height - btnRow.height
+                    Layout.preferredHeight: parent.height - btnRowLayout.height
                     anchors.bottom: parent.bottom
                     TableViewColumn {role: "name"; title: "Repo Name"; width:100}
                     TableViewColumn {role: "content"; title: "File Path"}
@@ -179,8 +185,10 @@ ApplicationWindow {
             }
         }
         Tab {
+            id: aboutTab
             title: "About"
             TextArea {
+                id: about
                 readOnly: true
                 text: window.copyright
                 anchors.fill: parent
