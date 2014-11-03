@@ -1,3 +1,6 @@
+// Copyright (C) 2014 Chaserhkj
+// This file is licensed under the MIT license
+// For more details, see COPYRIGHT
 import QtQuick 2.3
 import QtQuick.Window 2.2
 import QtQuick.Controls 1.2

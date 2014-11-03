@@ -1,4 +1,8 @@
 #!/usr/bin/env python
+# Copyright (C) 2014 Chaserhkj
+# This file is licensed under the MIT license
+# For more details, see COPYRIGHT
+
 from PyQt5.QtCore import QAbstractListModel
 from PyQt5.QtCore import QVariant
 from PyQt5.QtCore import Qt
